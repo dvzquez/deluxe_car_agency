@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Base de datos no disponible | LUXE MOTORS MX{% endblock %}
+{% block content %}
+<section class="catalog-page"><div class="container-lm">
+  <p class="section-eyebrow">Conexión pendiente</p>
+  <h1 class="section-title">No se pudo consultar MySQL</h1>
+  <p class="catalog-lead">Verifica que MySQL esté iniciado en XAMPP, que <code>python_app/.env</code> tenga las credenciales correctas y que <code>agencia_db</code> contenga la tabla <code>autos</code>.</p>
+  <a class="simple-link" href="{{ url_for('main.health') }}">Comprobar el servidor Flask</a>
+</div></section>
+{% endblock %}

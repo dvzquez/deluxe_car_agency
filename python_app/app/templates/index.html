@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %}LUXE MOTORS MX | Compra y explora{% endblock %}
+{% block content %}
+<!-- Hero adaptado del HTML original: solo se reemplazó la lógica PHP. -->
+<section class="lm-hero">
+  <div class="lm-hero__bg"></div>
+  <div class="lm-hero__lines"></div>
+  <div class="lm-hero__glow"></div>
+  <div class="lm-hero__inner">
+    <div class="lm-hero__content">
+      <p class="lm-hero__eyebrow">Agencia Premium · CDMX</p>
+      <h1 class="lm-hero__title">Vive el<br><em>lujo</em> que<br>mereces</h1>
+      <p class="lm-hero__subtitle">Explora modelos de lujo en nuestro catálogo. Esta nueva versión implementa las consultas con Python y Flask.</p>
+      <div class="lm-hero__actions">
+        <a class="btn-primary-hero" href="{{ url_for('main.catalogo') }}"><i class="fas fa-car fa-xs"></i> Explorar catálogo</a>
+        <a class="btn-outline-hero" href="{{ url_for('main.api_autos') }}">Ver API JSON</a>
+      </div>
+      <div class="lm-hero__stats">
+        <div class="hero-stat"><span class="num">{{ stats.total_modelos }}</span><span class="lbl">Modelos</span></div>
+        <div class="hero-stat"><span class="num">{{ stats.total_categorias }}</span><span class="lbl">Categorías</span></div>
+        <div class="hero-stat"><span class="num">Python</span><span class="lbl">Backend</span></div>
+        <div class="hero-stat"><span class="num">MySQL</span><span class="lbl">Datos</span></div>
+      </div>
+    </div>
+    <div class="lm-hero__visual">
+      <div class="hero-car-showcase">
+        {% if stats.destacado %}
+          <div class="hero-car-main">
+            {% if stats.destacado.imagen|car_image %}
+              <img src="{{ stats.destacado.imagen|car_image }}" alt="{{ stats.destacado.modelo }}" loading="eager">
+            {% endif %}
+          </div>
+          <div class="hero-car-badge">
+            <div class="modelo">{{ stats.destacado.modelo }}</div>
+            <div class="precio">Desde {{ stats.destacado.precio_base|mxn }}</div>
+          </div>
+        {% else %}
+          <div class="hero-car-main empty-image">No hay vehículos registrados todavía.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section cat-section">
+  <div class="container-lm">
+    <div class="section-head"><p class="section-eyebrow">Catálogo</p><h2 class="section-title">Explora por categoría</h2></div>
+    <div class="cat-grid">
+      {% for cat in categories %}
+      <a class="cat-tile" href="{{ url_for('main.catalogo', categoria=cat.categoria) }}">
+        <div class="cat-icon"><i class="fas fa-car"></i></div>
+        <div class="cat-name">{{ cat.categoria }}</div>
+        <div class="cat-count">{{ cat.total }} modelos disponibles</div>
+        <div class="cat-arrow">→</div>
+      </a>
+      {% else %}
+      <p class="empty-info">Todavía no existen categorías registradas.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container-lm">
+    <div class="section-head section-head--line">
+      <div><p class="section-eyebrow">Selección</p><h2 class="section-title">Modelos destacados</h2></div>
+      <a class="simple-link" href="{{ url_for('main.catalogo') }}">Ver todos →</a>
+    </div>
+    <div class="cars-grid">
+      {% for auto in autos %}
+      <a class="car-card" href="{{ url_for('main.catalogo', q=auto.modelo) }}">
+        <div class="car-card__img">
+          {% if auto.imagen|car_image %}<img src="{{ auto.imagen|car_image }}" alt="{{ auto.modelo }}" loading="lazy">{% endif %}
+        </div>
+        <div class="car-card__body">
+          <p class="car-card__cat">{{ auto.categoria }}</p>
+          <h3 class="car-card__modelo">{{ auto.modelo }}</h3>
+          <div class="car-card__footer">
+            <span class="car-card__price">{{ auto.precio_base|mxn }}</span>
+            <span class="car-card__cta">Ver en catálogo <i class="fas fa-arrow-right fa-xs"></i></span>
+          </div>
+        </div>
+      </a>
+      {% else %}
+      <p class="empty-info">No hay modelos disponibles.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<section class="section services-section">
+  <div class="container-lm">
+    <div class="section-head section-head--center">
+      <p class="section-eyebrow">Evolución del proyecto</p>
+      <h2 class="section-title">Construido en PHP,<br>modernizado con Python</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-item"><div class="service-icon"><i class="fas fa-database"></i></div><h3 class="service-title">MySQL</h3><p class="service-text">El mismo catálogo utiliza consultas parametrizadas desde SQLAlchemy.</p></div>
+      <div class="service-item"><div class="service-icon"><i class="fas fa-code"></i></div><h3 class="service-title">Flask</h3><p class="service-text">Las rutas HTML y JSON se implementan con Python y plantillas Jinja.</p></div>
+      <div class="service-item"><div class="service-icon"><i class="fas fa-shield-alt"></i></div><h3 class="service-title">Migración gradual</h3><p class="service-text">La facturación, la compraventa y la administración siguen pendientes en esta versión.</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

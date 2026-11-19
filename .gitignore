@@ -1,0 +1,25 @@
+# Python: entornos virtuales, cachés y artefactos locales.
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Credenciales: conservar los .env.example para documentar variables.
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Copias de datos privadas y herramientas locales.
+*.sqlite3
+*.db
+*.sql.gz
+.DS_Store
+.idea/
+.vscode/

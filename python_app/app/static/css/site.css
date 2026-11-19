@@ -1,0 +1,32 @@
+/* Estilos específicos de la aplicación Flask. No reemplazan el diseño original. */
+.python-nav {
+  position: relative; z-index: 10; background: rgba(7, 7, 7, .97);
+  border-bottom: 1px solid #24201b; padding: 21px max(5vw, 22px);
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+}
+.python-nav__brand { color: #ebebeb; font-family: 'Cormorant Garamond', serif; font-size: 25px; text-decoration: none; white-space: nowrap; }
+.python-nav em, .python-footer em { font-style: normal; color: #c9a96e; }
+.python-nav nav { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.python-nav nav a { color: #aaa; font-size: 13px; text-decoration: none; }
+.python-nav nav a:hover, .python-nav nav a[aria-current=page] { color: #c9a96e; }
+.python-footer { display: flex; flex-wrap: wrap; gap: 12px 32px; justify-content: space-between; padding: 34px 5vw; border-top: 1px solid #24201b; background: #090909; color: #888; font-size: 12px; }
+.python-footer strong { color: #eee; letter-spacing: .12em; }
+.section-head--line { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
+.section-head--center { text-align: center; margin-bottom: 64px; }
+.section-head--center .section-eyebrow { justify-content: center; }
+.simple-link { color: #c9a96e; text-decoration: none; font-size: 13px; }
+.simple-link:hover { text-decoration: underline; }
+.empty-info { color: #aaa; padding: 42px 12px; }
+.empty-image { padding: 22px; display: flex; justify-content: center; align-items: center; color: #aaa; min-height: 230px; }
+.catalog-page { padding: 84px 0 120px; min-height: 70vh; }
+.catalog-lead { margin: 18px 0 35px; color: #999; font-size: 15px; line-height: 1.7; }
+.catalog-filter { display: grid; grid-template-columns: 1.4fr 1fr 1fr auto; gap: 12px; align-items: end; padding: 24px; border: 1px solid #2f281e; background: #111; margin: 35px 0 24px; }
+.catalog-filter label { display: flex; flex-direction: column; gap: 9px; color: #c9a96e; font-size: 12px; }
+.catalog-filter input, .catalog-filter select { font: inherit; font-size: 13px; color: #eee; background: #070707; border: 1px solid #3a332b; padding: 12px; width: 100%; border-radius: 2px; }
+.catalog-filter button { color: #111; background: #c9a96e; border: 0; padding: 13px 20px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.catalog-filter button:hover { background: #e3c690; }
+.catalog-count { color: #777; font-size: 12px; margin-bottom: 26px; }
+.catalog-count a { color: #c9a96e; }
+.catalog-page .cars-grid { margin-top: 20px; }
+@media(max-width: 900px) { .catalog-filter { grid-template-columns: 1fr 1fr; } .python-nav { flex-wrap: wrap; } }
+@media(max-width: 600px) { .catalog-filter { grid-template-columns: 1fr; } .python-nav nav { gap: 18px; } .lm-hero__inner { padding: 70px 22px; } .section-head--line { flex-direction: column; align-items: flex-start; } }

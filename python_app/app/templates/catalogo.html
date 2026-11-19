@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Catálogo | LUXE MOTORS MX{% endblock %}
+{% block content %}
+<section class="catalog-page">
+  <div class="container-lm">
+    <p class="section-eyebrow">Selección exclusiva</p>
+    <h1 class="section-title">Explorar vehículos</h1>
+    <p class="catalog-lead">Consulta la base de datos MySQL mediante filtros procesados por Python.</p>
+    <form class="catalog-filter" method="get" action="{{ url_for('main.catalogo') }}">
+      <label>Buscar modelo
+        <input name="q" type="search" value="{{ q }}" placeholder="Ej. Porsche" maxlength="100">
+      </label>
+      <label>Categoría
+        <select name="categoria">
+          <option value="">Todas</option>
+          {% for cat in categories %}
+          <option value="{{ cat.categoria }}" {% if categoria == cat.categoria %}selected{% endif %}>{{ cat.categoria }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>Ordenar
+        <select name="orden">
+          <option value="precio_asc" {% if orden == 'precio_asc' %}selected{% endif %}>Precio: menor a mayor</option>
+          <option value="precio_desc" {% if orden == 'precio_desc' %}selected{% endif %}>Precio: mayor a menor</option>
+          <option value="nombre" {% if orden == 'nombre' %}selected{% endif %}>Nombre (A–Z)</option>
+        </select>
+      </label>
+      <button type="submit">Buscar autos</button>
+    </form>
+    <p class="catalog-count">{{ autos|length }} resultado(s) · <a href="{{ url_for('main.catalogo') }}">Restablecer filtros</a></p>
+    <div class="cars-grid">
+      {% for auto in autos %}
+      <article class="car-card">
+        <div class="car-card__img">
+          {% if auto.imagen|car_image %}<img src="{{ auto.imagen|car_image }}" alt="{{ auto.modelo }}" loading="lazy">{% endif %}
+        </div>
+        <div class="car-card__body">
+          <p class="car-card__cat">{{ auto.categoria }}</p>
+          <h2 class="car-card__modelo">{{ auto.modelo }}</h2>
+          <div class="car-card__footer"><span class="car-card__price">{{ auto.precio_base|mxn }}</span></div>
+        </div>
+      </article>
+      {% else %}
+      <div class="empty-info">No se encontraron vehículos con estos criterios.</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}LUXE MOTORS MX | Agencia Premium{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+  {% block styles %}{% endblock %}
+</head>
+<body>
+  <header class="python-nav" role="banner">
+    <a class="python-nav__brand" href="{{ url_for('main.index') }}">LUXE MOTORS <em>MX</em></a>
+    <nav aria-label="Navegación principal">
+      <a href="{{ url_for('main.index') }}" {% if request.endpoint == 'main.index' %}aria-current="page"{% endif %}>Inicio</a>
+      <a href="{{ url_for('main.catalogo') }}" {% if request.endpoint == 'main.catalogo' %}aria-current="page"{% endif %}>Catálogo</a>
+      <a href="{{ url_for('main.api_autos') }}">API JSON</a>
+    </nav>
+  </header>
+  <main id="contenido">{% block content %}{% endblock %}</main>
+  <footer class="python-footer">
+    <strong>LUXE MOTORS <em>MX</em></strong>
+    <span>Plataforma demostrativa · Migración progresiva de PHP a Python + Flask + MySQL</span>
+  </footer>
+</body>
+</html>
